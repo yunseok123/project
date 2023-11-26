@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="assets/css/search.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/8eb5905426.js" crossorigin="anonymous"></script>
+    <!--검색하는 부분-->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    
+    
+
+    <title>ANYWHERE</title>
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+
+    <link rel="stylesheet" href="assets/css/templatemo-hexashop.css">
+
+    <link rel="stylesheet" href="assets/css/owl-carousel.css">
+
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+
+    <link rel="stylesheet" href="assets/css/customreco.css">
+<!--
+
+TemplateMo 571 Hexashop
+
+https://templatemo.com/tm-571-hexashop
+
+-->
+
+    </head>
+    
+    <body>
+        
+    
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/foodlogo.jpg">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                           <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+<li class="scroll-to-section"><a href="#women">recommend</a></li>
+<li class="scroll-to-section"><a href="#search">search</a></li>
+<li class="scroll-to-section" id="loginItem">
+    <a href="#login" onclick="kakaoLogin()" id="loginLink">로그인</a>
+</li>
+<!-- ***** Menu End ***** -->
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<script type="text/javascript">
+    // 카카오 초기화
+    Kakao.init('f5fb468455abb768835f1cae5f631b25');
+
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function(authObj) {
+                updateLoginStatus();
+            },
+            fail: function(err) {
+                console.error(err);
+            }
+        });
+    }
+
+    function kakaoLogout() {
+        Kakao.Auth.logout(function() {
+            alert('로그아웃 되었습니다.');
+            const loginLink = document.getElementById('loginLink');
+            loginLink.textContent = '로그인';
+            loginLink.onclick = kakaoLogin;
+        });
+    }
+
+    function updateLoginStatus() {
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v2/user/me',
+                success: function(res) {
+                    const loginLink = document.getElementById('loginLink');
+                    loginLink.textContent = res.properties.nickname;
+                    loginLink.onclick = () => {
+                        if (confirm('로그아웃 하시겠습니까?')) {
+                            kakaoLogout();
+                        }
+                    };
+                },
+                fail: function(error) {
+                    console.error(error);
+                }
+            });
+        }
+    }
+
+        // 로그인 상태 업데이트
+        updateLoginStatus();
+</script>
+	
+
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <div class="thumb">
+                            <div class="inner-content">
+                                <h4>How about this?</h4>
+                                <span>결정이 쉽지 않을 때 추천을 받아보세요!</span>
+                                <div class="main-border-button">
+                                    <li class="scroll-to-section"><a href="#women">추천 받으러 가기!</a></li>
+                                </div>
+                            </div>
+                            <img src="assets/images/left-banner-image.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <div class="thumb">
+                            <div class="inner-content">
+                                <h4>Where is fine?</h4>
+                                <span>원하는 곳을 검색해보세요!</span>
+                                <div class="main-border-button">
+                                    <li class="scroll-to-section"><a href="#search">검색 하러 가기!</a></li>
+                                </div>
+                            </div>
+                            <img src="assets/images/baner-right-image-03.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+    <section class="section" id="women">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Custom Recommendation</h2>
+                    <span>당신의 취향과 상황에 맞는 맛집을 추천해드립니다! 아래의 요소를 선택해주세요</span>
+                </div>
+
+
+                    <div class="row">
+                        <div class="col-6">
+                            
+<form action="/asd/anywhere/RunPythonServlet" method="post" onsubmit="return checkForm(this);" accept-charset="UTF-8">
+                                    <h2 id="mainoption">방문 목적</h2><br>
+                               <label><input type="checkbox" class="visit-purpose" name="visit_purpose" value="가족">가족</label>
+<label><input type="checkbox" class="visit-purpose" name="visit_purpose" value="데이트">데이트</label>
+<label><input type="checkbox" class="visit-purpose" name="visit_purpose" value="혼밥">혼밥</label>
+<label><input type="checkbox" class="visit-purpose" name="visit_purpose" value="모임">모임</label>
+
+<script>
+    var checkboxes = document.querySelectorAll('.visit-purpose');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                checkboxes.forEach(function(innerCheckbox) {
+                    if (innerCheckbox !== checkbox) {
+                        innerCheckbox.disabled = true;
+                    }
+                });
+            } else {
+                checkboxes.forEach(function(innerCheckbox) {
+                    innerCheckbox.disabled = false;
+                });
+            }
+        });
+    });
+</script>
+
+                               
+	                                     
+	                             <h2 id="mainoption">세부요소</h2><br>
+                                <label><input type="checkbox" name="features[]" value="서비스">서비스</label>
+                                <label><input type="checkbox" name="features[]" value="가성비">가성비</label>
+                                <label><input type="checkbox" name="features[]" value="푸드퀄리티">푸드퀄리티</label>
+                                <label><input type="checkbox" name="features[]" value="분위기">분위기</label>
+                            
+                 
+
+                        </div>
+                        <div class="col-6">
+                            
+                       
+  
+                          
+                                <h2 id="mainoption">편의성</h2><br>
+                                <label><input type="checkbox" name="features[]"  value="단체이용">단체이용</label>
+                                <label><input type="checkbox" name="features[]"  value="포장">포장</label>
+                                <label><input type="checkbox" name="features[]"  value="예약">예약</label>
+                                <label><input type="checkbox" name="features[]"  value="주차">주차</label>
+                            
+
+                           
+                        </div>
+                    </div>
+       
+    <input type="hidden" name="kakao_id" id="kakao-id-field">
+
+
+    <input type="submit" value="검색" id="myButton" onclick="changeText()">
+</form>
+
+<script>
+  function checkForm(form) {
+    // '방문 목적' 체크박스가 선택되었는지 확인
+    const visitPurposeCheckboxes = form.querySelectorAll('.visit-purpose');
+    const isVisitPurposeChecked = Array.from(visitPurposeCheckboxes).some(checkbox => checkbox.checked);
+
+    // '편의성'과 '세부사항' 체크박스 중 하나라도 선택되었는지 확인
+    const featuresCheckboxes = form.querySelectorAll('input[name="features[]"]');
+    const isFeatureChecked = Array.from(featuresCheckboxes).some(checkbox => checkbox.checked);
+
+    // 방문 목적 체크박스가 선택되지 않았다면 경고
+    if (!isVisitPurposeChecked) {
+      alert('방문 목적을 선택해주세요.');
+      return false;
+    }
+
+    // 편의성이나 세부사항 중 하나도 선택되지 않았다면 경고
+    if (!isFeatureChecked) {
+      alert('편의성이나 세부사항 중 적어도 하나를 선택해주세요.');
+      return false;
+    }
+
+    // 검색 버튼의 텍스트 변경
+    document.getElementById("myButton").value = "검색중입니다";
+    return true; // 모든 검증을 통과했다면 폼 제출
+  }
+</script>
+
+
+                </DIV>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    
+
+    <!-- ***** search Area Starts ***** -->
+<!-- search Area Starts -->
+<script>
+    window.onload = function() {
+        var searchInput = document.querySelector('[name="searchQuery"]');
+        
+        searchInput.addEventListener('focus', function() {
+            this.setAttribute('data-placeholder', this.placeholder);
+            this.placeholder = '';
+        });
+
+        searchInput.addEventListener('blur', function() {
+            if (!this.value) {
+                this.placeholder = this.getAttribute('data-placeholder');
+            }
+        });
+    };
+</script>
+
+<section class="section" id="search">
+    <img src="assets/images/searchlogo.jpg" class="weegle">
+    <form action="/asd/anywhere/SearchServlet" method="post" accept-charset="UTF-8">
+        <div class="search">
+            <input type="text" name="searchQuery" placeholder="메뉴 이름, 가게 이름을 입력하세요">
+            <br><br><button type="submit" id="searchQuery"  onclick="changetext()">검&nbsp&nbsp&nbsp&nbsp&nbsp색</button>
+            <i class="fas fa-keyboard"></i>
+            <i class="fas fa-microphone"></i>
+                
+            
+        </div>
+    </form>
+</section>
+<script>
+    function changeText() {
+        document.getElementById("searchQuery").value = "검색중입니다";
+    }
+</script>
+
+
+
+    <!-- ***** search Area Ends ***** -->
+    
+
+    <!-- ***** Women Area Starts ***** -->
+
+
+
+
+    <!-- ***** Women Area Ends ***** -->
+
+   
+    <!-- ***** Kids Area Ends ***** -->
+
+    <!-- ***** Explore Area Starts ***** -->
+    
+    <!-- ***** Explore Area Ends ***** -->
+
+    <!-- ***** Social Area Starts ***** -->
+    <section class="section" id="social">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Social Media</h2>
+                        <span>SNS에 방문해 다양한 소식과 혜택을 접해보세요:)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row images">
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Instagram</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="assets/images/instagram-01.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://Facebook.com">
+                                <h6>Facebook</h6>
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </div>
+                        <img src="assets/images/instagram-02.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://twitter.com">
+                                <h6>Twitter</h6>
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </div>
+                        <img src="assets/images/instagram-03.jpg" alt="">
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </section>
+    <!-- ***** Social Area Ends ***** -->
+
+    <!-- ***** Subscribe Area Starts ***** -->
+    <div class="subscribe">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                  
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <ul>
+                                <li>Company Location:<br><span>신한대학교</span></li>
+                                <li>Phone:<br><span>031-1234-5678</span></li>
+                                <li>Office Location:<br><span>South korea Seoul</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul>
+                                <li>Work Hours:<br><span>09:30 AM - 5:30 PM</span></li>
+                                <li>Email:<br><span>anywhere@naver.com</span></li>
+                                <li>Social Media:<br><span> <a href="http://Facebook.com">Facebook</a>,  <a href="http://instagram.com">Instagram</a>,  <a href="http://twitter.com">Twitter</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Subscribe Area Ends ***** -->
+    
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="first-item">
+                        <div class="logo">
+                            <img src="assets/images/foodlogo.jpg" alt="hexashop ecommerce templatemo">
+                        </div>
+                        <ul>
+                            <li><a href="#">경기도 의정부시 호암로 95</a></li>
+                            <li><a href="#">anywhere@naver.com</a></li>
+                            <li><a href="#">031-1234-5678</a></li>
+                        </ul>
+                    </div>
+                </div>
+           
+                <div class="col-lg-3">
+                    <h4>Useful Links</h4>
+                    <ul>
+                           <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                    
+<li class="scroll-to-section"><a href="#women">recommend</a></li>
+<li class="scroll-to-section"><a href="#search">search</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="under-footer">
+                        <p>shinhan © 2023 아무데나 anywhere. btw. 
+                        
+                        <br>Design: <a href="#" target="_parent" title="#">David lee</a></p>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-paper-plane"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/accordions.js"></script>
+    <script src="assets/js/datepicker.js"></script>
+    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/imgfix.min.js"></script> 
+    <script src="assets/js/slick.js"></script> 
+    <script src="assets/js/lightbox.js"></script> 
+    <script src="assets/js/isotope.js"></script> 
+    
+    <!-- Global Init -->
+    <script src="assets/js/custom.js"></script>
+
+    <script>
+
+        $(function() {
+            var selectedClass = "";
+            $("p").click(function(){
+            selectedClass = $(this).attr("data-rel");
+            $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("."+selectedClass).fadeOut();
+            setTimeout(function() {
+              $("."+selectedClass).fadeIn();
+              $("#portfolio").fadeTo(50, 1);
+            }, 500);
+                
+            });
+        });
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap');
+
+
+#sel1{
+    width: 154px;
+    height: 27px;
+    font-size: 17px;
+    color:  rgb(77, 75, 75);
+    font-family: 'Noto Serif KR', serif;
+}
+
+#mainoption{
+    font-family: 'Noto Serif KR', serif;
+}
+
+#searchQuery{
+    border-radius: 30% 30% 30% 30%;
+    background-color: #ccefff;
+    color: #000;
+    width: 100px;
+    font-family: 'Noto Serif KR', serif;
+}
+
+
+
+#newshh{
+    position: absolute;
+    top: 51.6%;
+    width:50%;
+    padding-right:15px;
+    padding-left:15px;
+}
+
+#myButton{
+    background-color: #bdd7ee; /* 원하는 색상으로 변경하세요 */
+    color: #000;
+    font-family: 'Noto Serif KR', serif;
+}
+
+#myButton:hover {
+    background-color: #64b0f3; /* 원하는 색상으로 변경하세요 */
+    color: #ffffff;
+}
+
+#searchQuery:hover {
+    background-color: #64b0f3; /* 원하는 색상으로 변경하세요 */
+    color: #ffffff;
+}
+  
